@@ -68,10 +68,11 @@ void SsvepGL::initializeGL()
     // static const int samplesLength = REFRESH_RATE * (stimulationDuration);
 
     m_flicker.resize(m_frequencies.size());
-
+    double phase = 0.0;
     for (int i=0; i < m_frequencies.size(); ++i)
     {
-        m_flicker[i] = utils::gen_flick(m_frequencies[i], config::REFRESH_RATE, m_ssvep->stimulationDuration(), m_ssvep->stimulationMode(), config::PHASE*i);
+        phase = config::PHASE * ((i+1)%2);
+        m_flicker[i] = utils::gen_flick(m_frequencies[i], config::REFRESH_RATE, m_ssvep->stimulationDuration(), m_ssvep->stimulationMode(), phase);
     }
     //qDebug() << "flicker size: "<< m_flicker[0].size();
     // Application-specific initialization
@@ -163,7 +164,8 @@ void SsvepGL::startTrial()
 void SsvepGL::preTrial()
 {
 
-    if(m_trials == 0 && m_preTrialCount == 0)
+    // if(m_trials == 0 && m_preTrialCount == 0)
+    if(m_trials == 0)
     {
         sendMarker(OVTK_StimulationId_ExperimentStart);
     }
@@ -702,7 +704,7 @@ void SsvepGL::setSsvep(SSVEP *ssvep)
 
 bool SsvepGL::isCorrect() const
 {
-   return m_sessionFeedback[m_currentFlicker-1].digitValue() == m_flickeringSequence->sequence[m_currentFlicker-1];
+    return m_sessionFeedback[m_sessionFeedback.length()-1].digitValue() == m_flickeringSequence->sequence[m_currentFlicker];
 }
 
 void SsvepGL::update()

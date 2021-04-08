@@ -297,9 +297,11 @@ void HybridStimulation::hybridPostTrialEnd()
         }
 
         qDebug() << "Hybrid Experiment End";
+        m_ERPspeller->sendMarker(OVTK_StimulationId_ExperimentStop);
+        utils::wait(2000);
         // m_ERPspeller->close();
         // m_ssvepStimulation->close();
-        // emit experimentEnd();
+        //emit experimentEnd();
     }
 }
 

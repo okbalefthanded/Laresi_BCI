@@ -42,7 +42,7 @@ Speller::Speller(QWidget *parent) : QWidget(parent)
 
 Speller::Speller(int i)
 {
-   // qDebug()<< Q_FUNC_INFO;
+    // qDebug()<< Q_FUNC_INFO;
 }
 
 void Speller::startTrial()
@@ -562,7 +562,7 @@ void Speller::externalCommunication()
 void Speller::initLogger()
 {
 
-   // qDebug() << Q_FUNC_INFO;
+    // qDebug() << Q_FUNC_INFO;
 
     QDir logsDir(QCoreApplication::applicationDirPath() + "/logs");
     if(!logsDir.exists())
@@ -709,9 +709,13 @@ void Speller::showFeedback(QString command, bool correct)
             }
             QColor color;
             if (correct)
+            {
                 color = Qt::red;
+            }
             else
+            {
                 color = Qt::black;
+            }
             QPainter painter(&map);
             // painter.setPen(Qt::white);
             painter.setPen(color);

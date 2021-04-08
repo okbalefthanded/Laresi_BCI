@@ -105,7 +105,8 @@ const int start_port = 54321;
 //
 const uint64_t OVTK_StimulationLabel_Base = 0x00008100;
 const int REFRESH_RATE = 60;
-const double PHASE = 0.35*M_PI;
+// const double PHASE = 0.35*M_PI;
+const double PHASE = M_PI;
 }
 
 namespace external_comm {
